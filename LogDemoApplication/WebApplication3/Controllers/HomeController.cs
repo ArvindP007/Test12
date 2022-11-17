@@ -22,7 +22,8 @@ namespace WebApplication3.Controllers
             _logger.LogWarning("This is warning log");
             _logger.LogInformation("This is Information log");
         }
-        /*public IActionResult Index()
+        [Route("Home")]
+        public IActionResult Index()
         {
             return View();
         }
@@ -36,6 +37,6 @@ namespace WebApplication3.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }*/
+        }
     }
 }

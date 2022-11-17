@@ -1,0 +1,55 @@
+﻿@model MyApp.Models.ViewModels.CategoryVM
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>List of Categories</h1>
+
+<div class="container">
+    <div class="row p-3">
+        <div class="col-6">
+            <h2 class="text-bg-light">Categories</h2>
+        </div>
+        <div class="col-6">
+            
+            <a class="btn btn-outline-primary" asp-action="CreateUpdate" asp-controller="Category"><i class="bi bi-person-add"></i> Create New Category</a>
+            
+        </div>
+    </div>
+
+</div>
+
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Category Name</th>
+            <th>Display Order</th>
+            <th>Action</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.categories)
+        {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.DisplayOrder</td>
+            <td>
+                <div class="w-75 btn-group" role="group">
+                    <a asp-controller="Category" asp-action="CreateUpdate" asp-route-id="@item.Id" class="btn btn-primary mx-2"><i>Edit</i>
+                    </a>
+                </div>
+            </td>
+            <td>
+                <div class="w-75 btn-group" role="group">
+                    <a asp-controller="Category" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger mx-2"><i>Delete</i>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

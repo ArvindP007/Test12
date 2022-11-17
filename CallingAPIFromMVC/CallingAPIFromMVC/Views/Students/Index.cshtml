@@ -1,0 +1,114 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.Title = "Student";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Student</h2>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/JavaScript.js"></script>
+
+<div class="form-group">
+    <input id="txtStudentId" class="form-control" name="StudentId" readonly/>
+</div>
+
+<div class="form-group">
+    <label for="Name">Name: </label>
+    <input id="txtStudentName" class="form-control" name="Name"/>
+</div>
+
+<div class="form-group">
+    <label for="RollNo">Roll: </label>
+    <input id="txtStudentRoll" class="form-control" name="RollNo"/>
+</div>
+
+<div class="text-center panel-body">
+    <button id="btnSave" onclick="AddStudent()" class="btn btn-sm btn-primary">Save</button>
+</div>
+<button onclick="GetAllStudents()" class="btn btn-primary">Load students</button>
+<br />
+
+<h2>Student List</h2>
+<table id="tblStudent" class="table table-sm table-striped table-bordered m-2">
+    <thead>
+        <tr>
+            <th>Student Id</th>
+            <th>Name</th>
+            <th>Roll</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<!-- 
+
+style="display:none"
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+    });
+
+    function GetAllStudents(){
+        $.getJSON("/Students/GetAllStudents", function(students) {
+            $("#tblStudent tbody tr").remove();
+            $.map(students, function(student) {
+                $("#tblStudent tbody").append( "<tr>" 
+                    + " <td>" + student.Id + "</td>" 
+                    + " <td>" + student.Name + "</td>"
+                    + " <td>" + student.Roll + "</td>"
+                    + "</tr>");
+            });
+        });
+   }
+
+   $("#btnSave").click(function () {
+        var _student = {
+            Id: $("#txtStudentId").val(),
+            Name: $("#txtStudentName").val(),
+            Roll: $("#txtStudentRoll").val()
+        };
+
+        $.post("/Students/AddUpdateStudent", _student)
+            .done(function(data) {
+                    GetAllStudents
+            });
+    });
+
+</script>
+     
+    function Edit(studentId) {
+        if (studentId > 0) {
+            $.getJSON("/Students/GetById?studentId=" + studentId, function (student) {
+                $("#txtStudentId").val(student.studentId); 
+                $("#txtStudentName").val(student.name);
+                $("#txtStudent Roll").val(student.roll);
+            });
+        }
+    }
+
+    function Delete(studentId) {
+        if (Id > 0) {
+            $.ajax({
+                url: '/Students/Delete?Id='+ studentId,
+                type: 'DELETE',
+                dataType: 'json',
+                success: function(data) {
+                }
+                error: function(ex) {
+                    console.log('Error in Operation');
+                }
+            });
+        }
+    }
+
+
+                   
+         
+                     + "<td>" + "    <button class='btn-success' onclick='Edit(" + student.studentId + ")' style='margin'></button>
+                    + " <button class='btn-danger' onclick='Delete(" + student.studentId + ")' >Delete< /button>"
+                    + " </td>"
+    -->

@@ -1,0 +1,77 @@
+﻿@model MyApp.Models.ViewModels.ProductVM
+@{
+    ViewData["Title"] = (Model.Product==null || Model.Product.Id==0)? "Create":"Update";
+}
+<form method="post" asp-action="CreateUpdate" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Product.Id" />
+    <input type="hidden" asp-for="Product.ImageUrl" />
+    <div class="border p-3 mt-4">
+        <div class="row pb-3">
+            <h2 class="text-primary">@((Model.Product==null || Model.Product.Id==0)? "Create":"Update") Product</h2>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="Product.Name"></label>
+            <input asp-for="Product.Name" class="form-control"/>
+            <span asp-validation-for="Product.Name" class="text-danger"></span>
+        </div>
+        <div class="row mb-4">
+            <label asp-for="Product.Description"></label>
+            <textarea id="mytextarea" asp-for="Product.Description" class="form-control"></textarea>
+            <span asp-validation-for="Product.Description" class="text-danger"></span>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="Product.Price"></label>
+            <input asp-for="Product.Price" class="form-control"/>
+            <span asp-validation-for="Product.Price" class="text-danger"></span>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="Product.ImageUrl"></label>
+            <input type="file" name="file" id="ImageFile" asp-for="Product.ImageUrl" class="form-select"/>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="Product.CategoryId"></label>
+            @Html.DropDownListFor(model => model.Categories,ViewBag.Name as SelectList,  new { @class = "form-control" } )
+            <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+        </div>
+        <div>
+              
+        </div>
+        <button class="btn btn-primary" onclick="return ValidateEmpty()" type="submit">@((Model.Product==null || Model.Product.Id==0)? "Create":"Update")</button>
+    </div>
+    <a asp-action="Index" asp-controller="Product">Back To List</a>
+</form>
+
+@section scripts{
+    @{
+    <partial name="_ValidationScriptsPartial"/>
+    }
+    <script>
+    function ValidateEmpty() {
+        if (document.getElementById("ImageFile").value == "") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Upload Image !!'
+            });
+            return false;
+        }
+        return true;
+    }
+    </script>
+
+    <script type="text/javascript" src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js"></script>
+
+<script>
+      tinymce.init({
+        selector: '#mytextarea',
+        plugins: [
+          'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
+          'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
+          'powerpaste','fullscreen','formatpainter','insertdatetime','media','table','help','wordcount'
+        ],
+        toolbar: 'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
+          'alignleft aligncenter alignright alignjustify | ' +
+          'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help'
+      });
+    </script>
+}
