@@ -1,6 +1,5 @@
 using FakeCalculator;
 using Moq;
-using Xunit;
 
 namespace FakeCalulator.tests
 {
@@ -11,7 +10,6 @@ namespace FakeCalulator.tests
         {
             //var calulator = new ICalculator();
             //Assert.Equal(4, calculator.Add(2, 2));
-
             // Fake
             var calculator = new Mock<ICalculator>();
             calculator.Setup(x => x.Add(2, 2)).Returns(5);
